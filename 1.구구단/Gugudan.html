@@ -1,0 +1,92 @@
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>구구단</title>
+</head>
+<body>
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+<script type="text/babel">
+  'use strict';
+  const GuGuDan = () => {
+    const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9));
+    const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9));
+    const [value, setValue] = React.useState('');
+    const [result, setResult] = React.useState('');
+    const onSubmitForm = (e) => {
+      e.preventDefault();
+      if (parseInt(value) === first * second) {
+        setResult('정답');
+        setFirst(Math.ce il(Math.random() * 9));
+        setSecond(Math.ceil(Math.random() * 9));
+        setValue('');
+      } else {
+        setResult('땡');
+      }
+    };
+    let input;
+    React.useEffect(() => {
+      console.log('언제 실행될까요?');
+      input.focus();
+    });
+    return (
+      <React.Fragment>
+        <div>{first} 곱하기 {second}는?</div>
+        <form onSubmit={onSubmitForm}>
+          <input
+            ref={(c) => { input = c; }}
+            type="number"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+          />
+          <button>입력!</button>
+        </form>
+        <div id="result">{result}</div>
+      </React.Fragment>
+    );
+  };
+
+  // const 숫자1 = Math.ceil(Math.random() * 9);
+  // const 숫자2 = Math.ceil(Math.random() * 9);
+  // const 결과 = 숫자1 * 숫자2;
+  //
+  // var 바디 = document.body;
+  // var 단어 = document.createElement('div');
+  // 단어.textContent = String(숫자1) + '곱하기' + String(숫자2) + '는?';
+  // document.body.append(단어);
+  // var 폼 = document.createElement('form');
+  // document.body.append(폼);
+  // var 입력창 = document.createElement('input');
+  // 입력창.type = 'number';
+  // 폼.append(입력창);
+  // var 버튼 = document.createElement('button');
+  // 버튼.textContent = '입력!';
+  // 폼.append(버튼);
+  // var 결과창 = document.createElement('div');
+  // document.body.append(결과창);
+  //
+  // 폼.addEventListener('submit', function 콜백함수(e) {
+  //   e.preventDefault();
+  //   if (결과 === Number(입력창.value)) {
+  //     결과창.textContent = '딩동댕';
+  //     숫자1 = Math.ceil(Math.random() * 9);
+  //     숫자2 = Math.ceil(Math.random() * 9);
+  //     결과 = 숫자1 * 숫자2;
+  //     단어.textContent = String(숫자1) + '곱하기' + String(숫자2) + '는?';
+  //     입력창.value = '';
+  //     입력창.focus();
+  //   } else {
+  //     결과창.textContent = '땡';
+  //     입력창.value = '';
+  //     입력창.focus();
+  //   }
+  // });
+</script>
+<script type="text/babel">
+  ReactDOM.render(<GuGuDan/>, document.querySelector('#root'));
+</script>
+</body>
+</html>
