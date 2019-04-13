@@ -21,12 +21,13 @@ const NumberBaseball = () => {
   const onSubmitForm = (e) => {
     e.preventDefault();
     if (value === answer.join('')) {
-      const newTries = [...tries];
-      newTries.push({
-        try: value,
-        result: '홈런!',
-      });
-      setTries(newTries);
+      setTries((t) => ([
+        ...t,
+        {
+          try: value,
+          result: '홈런!',
+        }
+      ]));
       setResult('홈런!');
       alert('게임을 다시 실행합니다.');
       setValue('');
@@ -55,12 +56,13 @@ const NumberBaseball = () => {
             ball += 1;
           }
         }
-        const newTries = [...tries];
-        newTries.push({
-          try: value,
-          result: `${strike} 스트라이크, ${ball} 볼입니다.`,
-        });
-        setTries(newTries);
+        setTries(t => ([
+          ...t,
+          {
+            try: value,
+            result: `${strike} 스트라이크, ${ball} 볼입니다.`,
+          }
+        ]));
         setValue('');
         inputEl.current.focus();
       }

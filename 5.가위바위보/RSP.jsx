@@ -23,53 +23,48 @@ const computerChoice = (imgCoord) => {
   })[0];
 };
 
-function useInterval(callback, delay) {
-  const savedCallback = useRef();
-
-  // Remember the latest callback.
-  useEffect(() => {
-    savedCallback.current = callback;
-  });
-
-  // Set up the interval.
-  useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
-    if (delay !== null) {
-      let id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
-}
-
 const RSP = () => {
   const [score, setScore] = useState(0);
   const [imgCoord, setImgCoord] = useState('0');
+  const [result, setResult] = useState('');
+  const interval = useRef(0);
 
-  useInterval(() => {
-    if (imgCoord === rspCoords.바위) {
-      setImgCoord(rspCoords.가위);
-    } else if (imgCoord === rspCoords.가위) {
-      console.log('here');
-      setImgCoord(rspCoords.보);
-    } else {
-      setImgCoord(rspCoords.바위);
+  const intervalMaker = () => {
+    return setInterval(() => {
+      if (imgCoord === rspCoords.바위) {
+        setImgCoord(rspCoords.가위);
+      } else if (imgCoord === rspCoords.가위) {
+        setImgCoord(rspCoords.보);
+      } else {
+        setImgCoord(rspCoords.바위);
+      }
+    }, 100);
+  };
+
+  useEffect(() => {
+    interval.current = intervalMaker();
+    return () => {
+      clearInterval(interval.current);
     }
-  }, 100);
+  }, [imgCoord]);
 
   const onClickBtn = (choice) => {
+    clearInterval(interval.current);
+    setTimeout(() => {
+      interval.current = intervalMaker();
+    }, 1000);
     const myScore = scores[choice];
     const cpuScore = scores[computerChoice(imgCoord)];
     const diff = myScore - cpuScore;
     if (diff === 0) {
-      console.log('비겼습니다');
+      setResult('비겼습니다!');
     } else if ([-1, 2].includes(diff)) {
-      console.log('이겼습니다!!');
+      setResult('이겼습니다!!');
+      setScore(s => s + 1);
     } else {
-      console.log('졌습니다 ㅠㅠ.');
+      setResult('졌습니다 ㅠㅠ.');
+      setScore(s => s - 1);
     }
-    setScore(score + diff);
   };
 
   return (
@@ -80,6 +75,7 @@ const RSP = () => {
         <button id="scissor" className="btn" onClick={() => onClickBtn('가위')}>가위</button>
         <button id="paper" className="btn" onClick={() => onClickBtn('보')}>보</button>
       </div>
+      <div>{result}</div>
       <div>현재 {score}점</div>
     </>
   );
