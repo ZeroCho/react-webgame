@@ -5,7 +5,7 @@ const WordRelay = () => {
   const [word, setWord] = useState('제로초');
   const [value, setValue] = useState('');
   const [result, setResult] = useState('');
-  let input;
+  const inputEl = React.useRef(null);
 
   const onSubmitForm = (e) => {
     e.preventDefault();
@@ -13,11 +13,11 @@ const WordRelay = () => {
       setResult('딩동댕');
       setWord(value);
       setValue('');
-      input.focus();
+      inputEl.current.focus();
     } else {
       setResult('땡');
       setValue('');
-      input.focus();
+      inputEl.current.focus();
     }
   };
 
@@ -26,7 +26,7 @@ const WordRelay = () => {
       <div>{word}</div>
       <form onSubmit={onSubmitForm}>
         <input
-          ref={(c) => { input = c; }}
+          ref={inputEl}
           value={value}
           onChange={(e) => setValue(e.currentTarget.value)}
         />
