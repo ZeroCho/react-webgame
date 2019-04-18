@@ -1,25 +1,23 @@
 {
-  "name": "word-relay",
+  "name": "gugudan",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --hot"
+    "dev": "webpack"
   },
   "author": "ZeroCho",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
+    "babel-loader": "^8.0.5",
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.5",
-    "react-hot-loader": "^4.8.4",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0",
-    "webpack-dev-server": "^3.3.1"
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.0"
   }
 }

@@ -1,12 +1,13 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-  name: 'number-baseball-dev',
   mode: 'development',
-  devtool: 'eval',
+  devtool: 'eval', // hidden-source-map
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.jsx', '.js'],
   },
+
   entry: {
     app: './client',
   },
@@ -17,20 +18,22 @@ module.exports = {
       options: {
         presets: [
           ['@babel/preset-env', {
-            targets: {browsers: ['last 2 chrome versions']},
+            targets: {
+              browsers: ['> 1% in KR'], // browserslist
+            },
             debug: true,
           }],
           '@babel/preset-react',
         ],
-        plugins: ['react-hot-loader/babel'],
+        plugins: [],
       },
-      exclude: path.join(__dirname, 'node_modules'),
     }],
   },
-  plugins: [],
+  plugins: [
+    new webpack.LoaderOptionsPlugin({ debug: true }),
+  ],
   output: {
+    filename: 'app.js',
     path: path.join(__dirname, 'dist'),
-    filename: '[name].js',
-    publicPath: '/dist',
   },
 };
