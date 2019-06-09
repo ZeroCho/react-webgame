@@ -11,7 +11,6 @@ module.exports = {
   entry: {
     app: ['./client'],
   }, // 입력
-
   module: {
     rules: [{
       test: /\.jsx?$/,
@@ -33,11 +32,10 @@ module.exports = {
       },
     }],
   },
-
   plugins: [],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'app.js',
     publicPath: '/dist/', // app.use('/dist', express.static(__dirname, 'dist'))
-  }
+  },
 };
