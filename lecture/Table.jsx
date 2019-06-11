@@ -1,12 +1,14 @@
 import React, { memo } from 'react';
 import Tr from './Tr';
 
-const Table = memo(({ onClickCell, turn, tableData }) => {
+const Table = memo(({ rowCount, started }) => {
   return (
     <table>
-      {tableData.map((row, i) => {
-        return <Tr key={i} index={i} onClickCell={onClickCell} row={row} />;
-      })}
+      {started
+        ? Array(rowCount).fill().map((row, i) => {
+          return <Tr key={i} rowIndex={i} />;
+        })
+        : null}
     </table>
   );
 });

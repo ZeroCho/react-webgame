@@ -26,7 +26,7 @@ const reducer = (state, action) => {
         tableData: [['', '', ''], ['', '', ''], ['', '', '']],
         recentCell: [-1, -1],
       };
-    case 'SET_TURN':
+    case 'CHANGE_TURN':
       return {
         ...state,
         turn: action.turn,
@@ -87,14 +87,14 @@ const TicTacToe = () => {
         console.log('b');
         dispatch({ type: 'SET_WINNER', winner: turn });
         dispatch({ type: 'RESET_TABLE_DATA' });
-        dispatch({ type: 'SET_TURN', turn: 'O' });
+        dispatch({ type: 'CHANGE_TURN', turn: 'O' });
       } else if (checkAllFilled()) {
         console.log('c');
         dispatch({ type: 'RESET_TABLE_DATA' });
-        dispatch({ type: 'SET_TURN', turn: 'O' });
+        dispatch({ type: 'CHANGE_TURN', turn: 'O' });
       } else {
         console.log(state.turn === 'O' ? 'X' : 'O');
-        dispatch({ type: 'SET_TURN', turn: turn === 'O' ? 'X' : 'O' });
+        dispatch({ type: 'CHANGE_TURN', turn: turn === 'O' ? 'X' : 'O' });
       }
     }
   }, [recentCell]);
