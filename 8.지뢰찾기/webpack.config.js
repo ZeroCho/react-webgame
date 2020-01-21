@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  name: 'lotto-dev',
+  name: 'minesearch-dev',
   mode: 'development',
   devtool: 'eval',
   resolve: {
