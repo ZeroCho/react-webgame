@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useCallback} from 'react';
 import Try from "./Try";
 
 const getNumbers = () => {
@@ -18,7 +18,7 @@ const NumberBaseball = () => {
   const [tries, setTries] = useState([]);
   const inputEl = useRef(null);
 
-  const onSubmitForm = (e) => {
+  const onSubmitForm = useCallback((e) => {
     e.preventDefault();
     if (value === answer.join('')) {
       setTries((t) => ([
@@ -67,7 +67,9 @@ const NumberBaseball = () => {
         inputEl.current.focus();
       }
     }
-  };
+  }, [value, answer]);
+
+  const onChangeInput = useCallback((e) => setValue(e.target.value), []);
 
   return (
     <>
@@ -77,7 +79,7 @@ const NumberBaseball = () => {
           ref={inputEl}
           maxLength={4}
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={onChangeInput}
         />
         <button>입력!</button>
       </form>

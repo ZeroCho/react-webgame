@@ -1,4 +1,4 @@
-import React, { useContext, useCallback, memo, useMemo } from 'react';
+import React, { useContext, useCallback, useMemo, memo } from 'react';
 import { CLICK_MINE, CODE, FLAG_CELL, NORMALIZE_CELL, OPEN_CELL, QUESTION_CELL, TableContext } from './MineSearch';
 
 const getTdStyle = (code) => {

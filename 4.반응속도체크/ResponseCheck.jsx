@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback, useMemo } from 'react';
 
 const ResponseCheck = () => {
   const [state, setState] = useState('waiting');
@@ -8,7 +8,7 @@ const ResponseCheck = () => {
   const startTime = useRef(0);
   const endTime = useRef(0);
 
-  const onClickScreen = () => {
+  const onClickScreen = useCallback(() => {
     if (state === 'waiting') {
       timeout.current = setTimeout(() => {
         setState('now');
@@ -29,10 +29,10 @@ const ResponseCheck = () => {
         return [...prevResult, endTime.current - startTime.current];
       });
     }
-  };
-  const onReset = () => {
+  }, [state]);
+  const onReset = useCallback(() => {
     setResult([]);
-  };
+  }, []);
 
   const renderAverage = () => {
     return result.length === 0

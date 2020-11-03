@@ -66,22 +66,25 @@ const RSP = () => {
   };
 
   const onClickBtn = (choice) => () => {
-    clearInterval(interval.current);
-    const myScore = scores[choice];
-    const cpuScore = scores[computerChoice(imgCoord)];
-    const diff = myScore - cpuScore;
-    if (diff === 0) {
-      setResult('비겼습니다!');
-    } else if ([-1, 2].includes(diff)) {
-      setResult('이겼습니다!');
-      setScore((prevScore) => prevScore + 1);
-    } else {
-      setResult('졌습니다!');
-      setScore((prevScore) => prevScore - 1);
+    if (interval.current) {
+      clearInterval(interval.current);
+      interval.current = null;
+      const myScore = scores[choice];
+      const cpuScore = scores[computerChoice(imgCoord)];
+      const diff = myScore - cpuScore;
+      if (diff === 0) {
+        setResult('비겼습니다!');
+      } else if ([-1, 2].includes(diff)) {
+        setResult('이겼습니다!');
+        setScore((prevScore) => prevScore + 1);
+      } else {
+        setResult('졌습니다!');
+        setScore((prevScore) => prevScore - 1);
+      }
+      setTimeout(() => {
+        interval.current = setInterval(changeHand, 100);
+      }, 1000);
     }
-    setTimeout(() => {
-      interval.current = setInterval(changeHand, 100);
-    }, 1000);
   };
 
   return (

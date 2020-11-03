@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-const Ball = React.memo(({ number }) => {
+const Ball = memo(({ number }) => {
   let background;
   if (number <= 10) {
     background = 'red';
