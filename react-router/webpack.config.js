@@ -1,9 +1,10 @@
 const path = require('path');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
   name: 'lotto-dev',
   mode: 'development',
-  devtool: 'eval',
+  devtool: 'inline-source-map',
   resolve: {
     extensions: ['.js', '.jsx'],
   },
@@ -23,17 +24,24 @@ module.exports = {
           '@babel/preset-react',
         ],
         plugins: [
-          'react-hot-loader/babel',
+          'react-refresh/babel',
           '@babel/plugin-proposal-class-properties',
         ],
       },
       exclude: path.join(__dirname, 'node_modules'),
     }],
   },
-  plugins: [],
+  plugins: [
+    new ReactRefreshWebpackPlugin(),
+  ],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js',
     publicPath: '/dist',
   },
+  devServer: {
+    historyApiFallback: true,
+    publicPath: '/dist',
+    hot: true
+  }
 };
