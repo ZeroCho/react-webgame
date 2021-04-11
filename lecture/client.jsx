@@ -1,9 +1,6 @@
-import React from 'react';
-import ReactDom from 'react-dom';
-import { hot } from 'react-hot-loader/root';
+const React = require('react');
+const ReactDom = require('react-dom');
 
-import Lotto from './Lotto';
+const WordRelay = require('./WordRelay');
 
-const Hot = hot(Lotto);
-
-ReactDom.render(<Hot />, document.querySelector('#root'));
+ReactDom.render(<WordRelay />, document.querySelector('#root'));

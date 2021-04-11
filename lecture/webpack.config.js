@@ -1,7 +1,8 @@
 const path = require('path');
+const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
-  name: 'numberbaseball-setting',
+  name: 'wordrelay',
   mode: 'development', // 실서비스: production
   devtool: 'eval', // 실서비스: hidden-source-map
   resolve: {
@@ -27,15 +28,21 @@ module.exports = {
         ],
         plugins: [
           '@babel/plugin-proposal-class-properties',
-          'react-hot-loader/babel',
+          'react-refresh/babel',
         ],
       },
     }],
   },
-  plugins: [],
+  plugins: [
+    new RefreshWebpackPlugin()
+  ],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'app.js',
-    publicPath: '/dist/', // app.use('/dist', express.static(__dirname, 'dist'))
+    publicPath: '/dist/',
+  },
+  devServer: {
+    publicPath: '/dist/',
+    hot: true
   },
 };

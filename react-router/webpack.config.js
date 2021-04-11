@@ -37,11 +37,11 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js',
-    publicPath: '/dist',
+    publicPath: '/dist/',
   },
   devServer: {
     historyApiFallback: true,
-    publicPath: '/dist',
+    publicPath: '/dist/',
     hot: true
   }
 };
