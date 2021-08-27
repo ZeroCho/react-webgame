@@ -37,7 +37,8 @@ module.exports = {
     publicPath: '/dist',
   },
   devServer: {
-    publicPath: '/dist',
+    devMiddleware: { publicPath: '/dist' },
+    static: { directory: path.resolve(__dirname) },
     hot: true
   }
 };
