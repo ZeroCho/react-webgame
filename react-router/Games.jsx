@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import GameMatcher from './GameMatcher';
 
 const Games = () => {
@@ -15,10 +15,10 @@ const Games = () => {
         <Link to="/game/index">게임 매쳐</Link>
       </div>
       <div>
-        <Switch>
-          <Route exact path="/" render={(props) => <GameMatcher {...props} />} />
-          <Route path="/game/:name" render={(props) => <GameMatcher {...props} />} />
-        </Switch>
+        <Routes>
+          <Route path="/" element={<GameMatcher />} />
+          <Route path="/game/:name" element={<GameMatcher />} />
+        </Routes>
       </div>
     </BrowserRouter>
   );

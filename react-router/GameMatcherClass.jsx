@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Component } from 'react';
 import NumberBaseball from '../3.숫자야구/NumberBaseballClass';
 import RSP from '../5.가위바위보/RSPClass';
 import Lotto from '../6.로또/LottoClass';
-import {useLocation, useNavigate, Routes, Route} from 'react-router';
+import {Route, Routes, useLocation} from "react-router";
 
 class GameMatcher extends Component {
   render() {
-    const location = useLocation();
-    const navigate = useNavigate();
     let urlSearchParams = new URLSearchParams(this.props.location.search.slice(1));
-    console.log(urlSearchParams.get('hello'));
     console.log(urlSearchParams.get('page'));
     return (
       <Routes>
@@ -27,4 +25,10 @@ class GameMatcher extends Component {
   }
 }
 
-export default GameMatcher;
+const WrappedComponent = (props) => {
+  const location = useLocation()
+
+  return <GameMatcher location={location} {...props} />
+}
+
+export default WrappedComponent;
