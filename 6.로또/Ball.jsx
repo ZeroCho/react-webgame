@@ -18,5 +18,6 @@ const Ball = memo(({ number }) => {
     <div className="ball" style={{ background }}>{number}</div>
   )
 });
+Ball.displayName = 'Ball';
 
 export default Ball;

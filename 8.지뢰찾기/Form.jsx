@@ -32,5 +32,6 @@ const Form = memo(() => {
     </div>
   );
 });
+Form.displayName = 'Form';
 
 export default Form;

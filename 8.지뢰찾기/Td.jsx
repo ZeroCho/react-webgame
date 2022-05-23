@@ -102,6 +102,7 @@ const Td = memo(({ rowIndex, cellIndex }) => {
 
   return <RealTd onClickTd={onClickTd} onRightClickTd={onRightClickTd} data={tableData[rowIndex][cellIndex]} />;
 });
+Td.displayName = 'Td';
 
 const RealTd = memo(({ onClickTd, onRightClickTd, data}) => {
   console.log('real td rendered');
@@ -113,5 +114,6 @@ const RealTd = memo(({ onClickTd, onRightClickTd, data}) => {
     >{getTdText(data)}</td>
   )
 });
+RealTd.displayName = 'RealTd';
 
 export default Td;

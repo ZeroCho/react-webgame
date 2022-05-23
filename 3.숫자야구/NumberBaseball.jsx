@@ -1,5 +1,5 @@
-import React, {useRef, useState, useCallback} from 'react';
-import Try from "./Try";
+import React, { useRef, useState, useCallback } from 'react';
+import Try from './Try';
 
 const getNumbers = () => {
   const candidates = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -12,7 +12,7 @@ const getNumbers = () => {
 };
 
 const NumberBaseball = () => {
-  const [answer, setAnswer] = useState(getNumbers());
+  const [answer, setAnswer] = useState(getNumbers); // lazy init
   const [value, setValue] = useState('');
   const [result, setResult] = useState('');
   const [tries, setTries] = useState([]);
@@ -26,7 +26,7 @@ const NumberBaseball = () => {
         {
           try: value,
           result: '홈런!',
-        }
+        },
       ]));
       setResult('홈런!');
       alert('게임을 다시 실행합니다.');
@@ -61,7 +61,7 @@ const NumberBaseball = () => {
           {
             try: value,
             result: `${strike} 스트라이크, ${ball} 볼입니다.`,
-          }
+          },
         ]));
         setValue('');
         inputEl.current.focus();
@@ -86,7 +86,7 @@ const NumberBaseball = () => {
       <div>시도: {tries.length}</div>
       <ul>
         {tries.map((v, i) => (
-          <Try key={`${i + 1}차 시도 : ${v.try}`} tryInfo={v}/>
+          <Try key={`${i + 1}차 시도 : ${v.try}`} tryInfo={v} />
         ))}
       </ul>
     </>

@@ -1,5 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
+import useInterval from './useInterval';
 
+// https://velog.io/@jakeseo_me/%EB%B2%88%EC%97%AD-%EB%A6%AC%EC%95%A1%ED%8A%B8-%ED%9B%85%EC%8A%A4-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EC%97%90%EC%84%9C-setInterval-%EC%82%AC%EC%9A%A9-%EC%8B%9C%EC%9D%98-%EB%AC%B8%EC%A0%9C%EC%A0%90#%ED%9B%85-%EB%81%84%EC%A7%91%EC%96%B4%EB%82%B4%EA%B8%B0
 const rspCoords = {
   바위: '0',
   가위: '-142px',
@@ -13,9 +15,7 @@ const scores = {
 };
 
 const computerChoice = (imgCoord) => {
-  return Object.entries(rspCoords).find(function(v) {
-    return v[1] === imgCoord;
-  })[0];
+  return Object.entries(rspCoords).find((v) => v[1] === imgCoord)[0];
 };
 
 //                        result, imgCoord, score
@@ -39,21 +39,20 @@ const computerChoice = (imgCoord) => {
 //   setResult();
 // }, [result]);
 
-
 const RSP = () => {
   const [result, setResult] = useState('');
   const [imgCoord, setImgCoord] = useState(rspCoords.바위);
   const [score, setScore] = useState(0);
-  const interval = useRef();
+  const [isRunning, setIsRunning] = useState(true);
 
-  useEffect(() => { // componentDidMount, componentDidUpdate 역할(1대1 대응은 아님)
-    console.log('다시 실행');
-    interval.current = setInterval(changeHand, 100);
-    return () => { // componentWillUnmount 역할
-      console.log('종료');
-      clearInterval(interval.current);
-    }
-  }, [imgCoord]);
+  // useEffect(() => { // componentDidMount, componentDidUpdate 역할(1대1 대응은 아님)
+  //   console.log('다시 실행');
+  //   interval.current = setInterval(changeHand, 100);
+  //   return () => { // componentWillUnmount 역할
+  //     console.log('종료');
+  //     clearInterval(interval.current);
+  //   }
+  // }, [imgCoord]);
 
   const changeHand = () => {
     if (imgCoord === rspCoords.바위) {
@@ -65,10 +64,11 @@ const RSP = () => {
     }
   };
 
+  useInterval(changeHand, isRunning ? 100 : null);
+
   const onClickBtn = (choice) => () => {
-    if (interval.current) {
-      clearInterval(interval.current);
-      interval.current = null;
+    if (isRunning) { // 멈췄을 때 또 클릭하는 것 막기
+      setIsRunning(false);
       const myScore = scores[choice];
       const cpuScore = scores[computerChoice(imgCoord)];
       const diff = myScore - cpuScore;
@@ -82,7 +82,7 @@ const RSP = () => {
         setScore((prevScore) => prevScore - 1);
       }
       setTimeout(() => {
-        interval.current = setInterval(changeHand, 100);
+        setIsRunning(true);
       }, 1000);
     }
   };

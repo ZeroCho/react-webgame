@@ -17,9 +17,7 @@ const scores = {
 };
 
 const computerChoice = (imgCoord) => {
-  return Object.entries(rspCoords).find(function(v) {
-    return v[1] === imgCoord;
-  })[0];
+  return Object.entries(rspCoords).find((v) => v[1] === imgCoord)[0];
 };
 
 class RSP extends Component {

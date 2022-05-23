@@ -8,5 +8,6 @@ const Try = memo(({tryInfo}) => {
     </li>
   );
 });
+Try.displayName = 'Try';
 
 export default Try;

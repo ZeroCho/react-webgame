@@ -81,6 +81,7 @@ const reducer = (state, action) => {
         },
         openedCount: 0,
         tableData: plantMine(action.row, action.cell, action.mine),
+        result: '',
         halted: false,
         timer: 0,
       };

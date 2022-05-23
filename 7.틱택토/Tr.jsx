@@ -11,5 +11,6 @@ const Tr = memo(({ rowData, rowIndex, dispatch }) => {
     </tr>
   );
 });
+Tr.displayName = 'Tr';
 
 export default Tr;
