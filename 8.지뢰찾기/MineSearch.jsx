@@ -118,26 +118,24 @@ const reducer = (state, action) => {
           return [CODE.MINE, CODE.FLAG_MINE, CODE.QUESTION_MINE].includes(v);
         }).length;
         if (count === 0) { // 주변칸 오픈
-          if (row > -1) {
-            const near = [];
-            if (row - 1 > -1) {
-              near.push([row -1, cell - 1]);
-              near.push([row -1, cell]);
-              near.push([row -1, cell + 1]);
-            }
-            near.push([row, cell - 1]);
-            near.push([row, cell + 1]);
-            if (row + 1 < tableData.length) {
-              near.push([row + 1, cell - 1]);
-              near.push([row + 1, cell]);
-              near.push([row + 1, cell + 1]);
-            }
-            near.forEach((n) => {
-              if (tableData[n[0]][n[1]] !== CODE.OPENED) {
-                checkAround(n[0], n[1]);
-              }
-            })
+          const near = [];
+          if (row - 1 > -1) {
+            near.push([row -1, cell - 1]);
+            near.push([row -1, cell]);
+            near.push([row -1, cell + 1]);
           }
+          near.push([row, cell - 1]);
+          near.push([row, cell + 1]);
+          if (row + 1 < tableData.length) {
+            near.push([row + 1, cell - 1]);
+            near.push([row + 1, cell]);
+            near.push([row + 1, cell + 1]);
+          }
+          near.forEach((n) => {
+            if (tableData[n[0]][n[1]] !== CODE.OPENED) {
+              checkAround(n[0], n[1]);
+            }
+          })
         }
         if (tableData[row][cell] === CODE.NORMAL) { // 내 칸이 닫힌 칸이면 카운트 증가
           openedCount += 1;
